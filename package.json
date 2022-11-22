@@ -1,0 +1,16 @@
+{
+  "name": "swaine-xmas-card-2022",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:johnzim/johnzim.github.io.git",
+  "author": "JL Swaine <jlswaine@me.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx babel --watch src --out-dir . --presets react-app/prod",
+    "server": "live-server"
+  },
+  "dependencies": {
+    "babel-cli": "6",
+    "babel-preset-react-app": "3"
+  }
+}

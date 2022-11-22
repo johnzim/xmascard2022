@@ -1,0 +1,263 @@
+body {
+}
+
+h1,
+h2,
+h3 {
+}
+
+.main-container {
+  width: 100vw;
+  display: grid;
+  grid-gap: 0.5rem;
+}
+
+.container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.background {
+  background-image: url('background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(0.5rem);
+  position: fixed;
+  height: 110%;
+  width: 110%;
+}
+
+.card {
+  position: relative;
+}
+
+.card-size {
+  max-width: 55rem;
+  perspective-origin: center;
+  transform: perspective(100rem);
+  transform-style: preserve-3d;
+  aspect-ratio: 1/1.5;
+}
+
+@media all and (orientation: landscape) {
+  .card-size {
+    height: 80vh;
+    aspect-ratio: 1/1.5;
+  }
+}
+
+@media all and (orientation: portrait) {
+  .card-size {
+    width: 80vw;
+    aspect-ratio: 1/1.5;
+  }
+}
+
+.outer-cover {
+  border-radius: 0rem 2% 2% 0rem;
+  overflow: hidden;
+  transform-origin: center left;
+  transform-style: preserve-3d;
+  border-radius: 0rem 2% 2% 0rem;
+  animation: cover-bump 4s;
+  animation-iteration-count: infinite;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+  backface-visibility: hidden;
+  cursor: pointer;
+}
+
+.outer-cover:hover {
+  animation: cover-nudge 400ms;
+  animation-fill-mode: forwards;
+}
+
+.cover-gloss {
+  position: absolute;
+  top: 0rem;
+  left; 0rem;
+  height: 100%;
+  width: 400%;
+  margin-left: -200%;
+background: linear-gradient(31deg, rgba(0,0,0,0.4) 28%, rgba(255,255,255,0) 73%, rgba(255,255,255,0.7) 77%, rgba(255,255,255,0) 84%);
+  animation: cover-gloss-bump 4s;
+  animation-iteration-count: infinite;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+  backface-visibility: hidden;
+}
+
+.outer-cover > img {
+  width: 100%;
+}
+
+.outer-cover-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #cccccc;
+  transform-style: preserve-3d;
+  transform-origin: center left;
+  transform: rotateY(180);
+  border-radius: 0rem 2% 2% 0rem;
+  animation-fill-mode: forwards;
+}
+
+.outer-cover:hover > .cover-gloss {
+  animation: cover-gloss-nudge 400ms;
+  animation-fill-mode: forwards;
+}
+
+.outer-cover.open {
+  animation: cover-open 1s;
+  animation-fill-mode: forwards;
+}
+
+.outer-cover-back.open {
+  animation: cover-open 1s;
+  animation-fill-mode: forwards;
+}
+
+.open > .cover-gloss {
+  animation: cover-gloss-move 1s;
+  animation-fill-mode: forwards;
+}
+
+.open > .cover-text{
+  animation: cover-text 1s;
+  animation-fill-mode: forwards;
+}
+
+.cover-text {
+  z-index: 3;
+  position: absolute;
+  padding-right: 2rem;
+  font-size: 3rem;
+  width: 100%;
+  text-align: center;
+}
+
+.card-backing {
+  position: absolute;
+  top: 0;
+  background-color: #eeeeee;
+  border-radius: 0rem 1.25rem 1.25rem 0rem;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.22);
+}
+
+@keyframes cover-open {
+  0% {
+    transform: perspective(100rem);
+    transform: perspective(100rem) rotate3d(0, 1, 0, -3deg);
+  }
+
+  100% {
+    transform: perspective(100rem) rotate3d(0, 1, 0, -100deg);
+    transform-style: preserve-3d;
+  }
+}
+
+@keyframes cover-open-back {
+  0% {
+    transform: perspective(100rem);
+    transform: perspective(100rem) rotate3d(0, 1, 0, -3deg);
+  }
+
+  100% {
+    z-index:2;
+    transform: perspective(100rem) rotate3d(0, 1, 0, -100deg);
+    transform-style: preserve-3d;
+  }
+}
+
+@keyframes cover-text {
+  0% {
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+@keyframes cover-gloss-move {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 30rem 0;
+  }
+}
+
+@keyframes cover-gloss-bump {
+  0% {
+    background-position: 0 0;
+  }
+
+  5% {
+    background-position: 2rem 0;
+  }
+  10% {
+    background-position: 0 0;
+  }
+  25% {
+    background-position: 2rem 0;
+  }
+  40% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes cover-nudge {
+  0% {
+    transform: perspective(100rem);
+  }
+
+  100% {
+    transform: perspective(100rem) rotate3d(0, 1, 0, -3deg);
+    transform-style: preserve-3d;
+  }
+}
+
+@keyframes cover-bump {
+  0% {
+    transform: perspective(100rem);
+  }
+
+  5% {
+    transform: perspective(100rem) rotate3d(0, 1, 0, -1deg);
+    transform-style: preserve-3d;
+  }
+  10% {
+    transform: perspective(100rem);
+  }
+  25% {
+    transform: perspective(100rem) rotate3d(0, 1, 0, -1deg);
+    transform-style: preserve-3d;
+  }
+  40% {
+    transform: perspective(100rem);
+  }
+}
+
+@keyframes cover-text-nudge {
+  0% {
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes cover-gloss-nudge {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 3rem 0;
+  }
+}
