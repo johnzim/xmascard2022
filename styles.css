@@ -1,4 +1,5 @@
 body {
+  margin: 0rem;
 }
 
 h1,
@@ -20,6 +21,7 @@ h3 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow-y: scroll;
 }
 
 .background {
@@ -30,6 +32,7 @@ h3 {
   position: fixed;
   height: 110%;
   width: 110%;
+  overflow-y: scroll;
 }
 
 .card {
@@ -44,10 +47,22 @@ h3 {
   aspect-ratio: 1/1.5;
 }
 
+.photo-size {
+  transition:  width 500ms, height 500ms;
+}
+
 @media all and (orientation: landscape) {
   .card-size {
     height: 80vh;
     aspect-ratio: 1/1.5;
+  }
+  .photo-size {
+    width: 45vh;
+    height: 30vh;
+  }
+  .photo-size.selected {
+    height: 100vh;
+    width: 150vh;
   }
 }
 
@@ -55,6 +70,14 @@ h3 {
   .card-size {
     width: 80vw;
     aspect-ratio: 1/1.5;
+  }
+  .photo-size {
+    height: 40vw ;
+    width: 60vw ;
+  }
+  .photo-size.selected {
+    width: 99vw;
+    height: 66vw;
   }
 }
 
@@ -123,7 +146,7 @@ background: linear-gradient(31deg, rgba(0,0,0,0.4) 28%, rgba(255,255,255,0) 73%,
   animation-fill-mode: forwards;
 }
 
-.open > .cover-gloss {
+.outer-cover.open > .cover-gloss {
   animation: cover-gloss-move 1s;
   animation-fill-mode: forwards;
 }
@@ -185,7 +208,7 @@ background: linear-gradient(31deg, rgba(0,0,0,0.4) 28%, rgba(255,255,255,0) 73%,
 
 @keyframes cover-gloss-move {
   0% {
-    background-position: 0 0;
+    background-position: 2rem 0;
   }
 
   100% {
@@ -260,4 +283,83 @@ background: linear-gradient(31deg, rgba(0,0,0,0.4) 28%, rgba(255,255,255,0) 73%,
   100% {
     background-position: 3rem 0;
   }
+}
+
+.photos {
+  position: fixed;
+  overflow-y: scroll;
+  left: 0;
+  top: 0;
+  padding-top: 45vh;
+  width: 100vw;
+  height: 100vh;
+  transition: grid-gap 500ms, transform 500ms, padding-top 500ms;
+  transition-delay: 300ms;
+  display: grid;
+  grid-template-rows: repeat(9, 0.1rem);
+  grid-gap: 0rem;
+}
+
+.open + .photos {
+  grid-gap: 20rem;
+  padding-top: 60vh;
+}
+
+.photo {
+  background-color: clear;
+  box-shadow: 0.25rem 0.25rem 0.25rem 0.125rem rgba(50,50,50,0.5);
+  border-radius: 0.25rem;
+  transition-delay: 400ms;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.photo > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+ }
+
+.remove-delay {
+  transition-delay: 0ms !important;
+}
+
+
+.open + .photos > .photo:nth-of-type(1n) {
+  transform: rotate(0deg) translateY(4rem);
+}
+
+.open + .photos > .photo:nth-of-type(1n):hover {
+  transition-delay: 0ms;
+  transition: transform 200ms, height 200ms, width 300ms, margin 300ms;
+  transform: rotate(0deg) translateY(4rem) scale3d(1.1, 1.1, 1.1);
+  z-index: 9;
+}
+
+div.photo.selected {
+  position: relative;
+  transform-origin: center;
+  transform:  scale(1) rotate(0deg) !important;
+  z-index: 19;
+}
+
+.open + .photos > .photo:nth-of-type(2n) {
+  transform: rotate(-10deg);
+}
+
+.open + .photos > .photo:nth-of-type(2n):hover {
+  transition-delay: 0ms;
+  transition: transform 200ms, height 200ms, width 300ms, margin 300ms;
+  transform: rotate(-10deg)  scale3d(1.1, 1.1, 1.1);
+  z-index: 9;
+}
+
+.open + .photos > .photo:nth-of-type(3n):hover {
+  transition-delay: 0ms;
+  transition: transform 200ms, height 200ms, width 300ms, margin 300ms;
+  transform: rotate(-40deg) scale3d(1.1, 1.1, 1.1);
+  z-index: 9;
+}
+.open + .photos > .photo:nth-of-type(3n) {
+  transform: rotate(-40deg);
 }

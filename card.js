@@ -23,6 +23,11 @@ var CardContent = function CardContent() {
       openCard = _React$useState2[0],
       setOpenCard = _React$useState2[1];
 
+  var _React$useState3 = React.useState(false),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      removeDelay = _React$useState4[0],
+      setRemoveDelay = _React$useState4[1];
+
   var outerCardClassnames = ["outer-cover", "card-size"];
   var outerCardBackClassNames = ["outer-cover-back", "card-size"];
 
@@ -36,6 +41,7 @@ var CardContent = function CardContent() {
     null,
     React.createElement("div", { className: "card-backing card-size" }),
     React.createElement("div", { className: outerCardBackClassNames.join(" ") }),
+    React.createElement(Photos, { removeDelay: removeDelay }),
     React.createElement(
       "div",
       { className: outerCardClassnames.join(" ") },
@@ -43,11 +49,75 @@ var CardContent = function CardContent() {
         className: "cover-gloss",
         onClick: function onClick() {
           setOpenCard(true);
+          setTimeout(function () {
+            setRemoveDelay(true);
+          }, 1000);
         }
       }),
       React.createElement("img", { src: "vera-christmas-pic.jpg" }),
       React.createElement("div", { className: "cover-text" })
     )
+  );
+};
+
+var Photos = function Photos(_ref) {
+  var removeDelay = _ref.removeDelay;
+
+  var _React$useState5 = React.useState(null),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      selected = _React$useState6[0],
+      setSelected = _React$useState6[1];
+
+  return React.createElement(
+    "div",
+    { className: "photos" },
+    React.createElement(Photo, {
+      imgSrc: "bigimage.jpg",
+      selected: selected,
+      removeDelay: removeDelay,
+      setSelected: setSelected
+    }),
+    React.createElement(Photo, {
+      imgSrc: "bigimage2.jpg",
+      selected: selected,
+      removeDelay: removeDelay,
+      setSelected: setSelected
+    }),
+    React.createElement(Photo, {
+      imgSrc: "bigimage3.jpg",
+      selected: selected,
+      removeDelay: removeDelay,
+      setSelected: setSelected
+    })
+  );
+};
+
+var Photo = function Photo(_ref2) {
+  var imgSrc = _ref2.imgSrc,
+      selected = _ref2.selected,
+      setSelected = _ref2.setSelected,
+      removeDelay = _ref2.removeDelay;
+
+  var classes = ["photo", "photo-size"];
+  if (imgSrc === selected) {
+    classes.push("selected");
+  }
+  if (removeDelay) {
+    classes.push("remove-delay");
+  }
+  return React.createElement(
+    "div",
+    {
+      className: classes.join(" "),
+      onClick: function onClick() {
+        if (selected === imgSrc) {
+          setSelected(null);
+        } else {
+          setSelected(imgSrc);
+        }
+      }
+    },
+    React.createElement("img", { src: imgSrc })
   );
 };
 
